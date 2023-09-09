@@ -12,16 +12,44 @@
     <span class="title">Library</span>
     <button class="login">Login</button>
 </header>
-<button class="addBook">Add Book</button>
+<button class="addBook" id="showDialog">Add Book</button>
 <div class="content">
-    <div class="bookshelf">
+    <table class="bookshelf">
+        <thead class="head">
+            <tr>
+                <th class="bookName">Name</th>
+                <th class="bookAuthor">Author</th>
+                <th class="bookPages">Pages</th>
+                <th class="bookStatus">Status</th>
+            </tr>
+        </thead>
+        <tbody class="content">
 
-    </div>
+        </tbody>
+    </table>
 </div>
 <footer>
     <span class="copyright">By Prabveer Pannu For The Odin Project</span>
 </footer>
-    
+<dialog id="favDialog">
+    <form>
+      <p>
+        <label>
+          Favorite animal:
+          <select>
+            <option value="default">Choose…</option>
+            <option>Brine shrimp</option>
+            <option>Red panda</option>
+            <option>Spider monkey</option>
+          </select>
+        </label>
+      </p>
+      <div>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button id="confirmBtn" value="default">Confirm</button>
+      </div>
+    </form>
+</dialog>
 <script src="script.js"></script>    
 </body>
 </html>

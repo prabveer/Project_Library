@@ -32,21 +32,22 @@
     <span class="copyright">By Prabveer Pannu For The Odin Project</span>
 </footer>
 <dialog id="favDialog">
-    <form>
+    <form id="filloutForm">
       <p>
-        <label>
-          Favorite animal:
-          <select>
-            <option value="default">Choose…</option>
-            <option>Brine shrimp</option>
-            <option>Red panda</option>
-            <option>Spider monkey</option>
-          </select>
-        </label>
+        <label>Book Name:</label>
+        <input type="text" name="formBookName" id="formBookName">
+        <label>Author Name:</label>
+        <input type="text" name="formAuthorName" id="formAuthorName">
+        <label>Page Total:</label>
+        <input type="number" name="formPageTotal" id="formPageTotal">
+        <label>Read?</label>
+        <select name="readstatus" id="readstatus">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
       </p>
       <div>
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button id="confirmBtn" value="default">Confirm</button>
+        <button id="confirmBtn" type="submit">Confirm</button>
       </div>
     </form>
 </dialog>

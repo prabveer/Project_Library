@@ -13,7 +13,8 @@ const formName	 = document.querySelector("#formBookName");
 const formAuthor = document.querySelector("#formAuthorName");
 const formPages = document.querySelector("#formPageTotal");
 const formStatus = document.querySelector("#readstatus");
-let i = 0;
+//let i = 0;
+let count = 2;
 let myLibrary = [
   {
     name: "Frankenstein",
@@ -58,15 +59,29 @@ function updateTable()
     <td>${arrayItem.pages}</td> 
     <td>${arrayItem.status ? 'Read' : 'Not Read'}</td> `;
     bookshelf.appendChild(tr)
-  }) 
+  })
 }
-//updateTable();
+function clearTable()
+{
+  for(let l = 0; l < count; l++)
+  {
+    let child = bookshelf.lastElementChild;
+    bookshelf.removeChild(child)
+  }
+
+}
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
   favDialog.showModal();
 });
-confirmButton.addEventListener("click", () => {
+confirmButton.addEventListener("click", (e) => {
+  e.preventDefault();
   addBookToLibrary();
+  clearTable();
+  count++;
   updateTable();
   clearForm();
+  favDialog.close()
 });
+
+updateTable();

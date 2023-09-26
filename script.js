@@ -13,20 +13,54 @@ const formName	 = document.querySelector("#formBookName");
 const formAuthor = document.querySelector("#formAuthorName");
 const formPages = document.querySelector("#formPageTotal");
 const formStatus = document.querySelector("#readstatus");
-//let i = 0;
-let count = 2;
+
+let count = 1;
+
+function clearTable()
+{
+  if(count != 0)
+  {
+    for(let l = 0; l < count; l++)
+    {
+      let child = bookshelf.lastElementChild;
+      bookshelf.removeChild(child)
+    }
+  }
+}
+
+const createReadStatusTd = (book) => {
+  let readStatusTd = document.createElement('td');
+  let readStatusButton = document.createElement('button');
+  readStatusButton.textContent = 'Change read status';
+  readStatusButton.addEventListener('click', (e) => {
+    clearTable();
+    book.status = !book.status;
+    updateTable();
+  }); 
+  readStatusTd.appendChild(readStatusButton);
+  return readStatusTd;
+}
+
+const createDeleteTd = (index) => {
+  let deleteTd = document.createElement('td');
+  let deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.addEventListener('click', () => {
+    clearTable();
+    count--;
+    myLibrary.splice(index, 1);
+    updateTable();
+  });
+  deleteTd.appendChild(deleteButton);
+  return deleteTd;
+}
+
 let myLibrary = [
   {
     name: "Frankenstein",
     author: "Mary Shelley",
     pages: 240,
     status: true
-  },
-  {
-    name: "Why",
-    author: "do i Suffer",
-    pages: 420,
-    status: false
   }
 ];
 
@@ -51,24 +85,19 @@ function addBookToLibrary() {
 }
 function updateTable()
 {
-  myLibrary.forEach(function (arrayItem)
+  myLibrary.forEach((arrayItem, index) =>
   {
     var tr = document.createElement('tr')
     tr.innerHTML = `<td>${arrayItem.name}</td>
     <td>${arrayItem.author}</td> 
     <td>${arrayItem.pages}</td> 
-    <td>${arrayItem.status ? 'Read' : 'Not Read'}</td> `;
+    <td>${arrayItem.status ? 'Read' : 'Not Read'}</td>`;
+
+    tr.appendChild(createReadStatusTd(arrayItem)); //
+    tr.appendChild(createDeleteTd(index)); 
+
     bookshelf.appendChild(tr)
   })
-}
-function clearTable()
-{
-  for(let l = 0; l < count; l++)
-  {
-    let child = bookshelf.lastElementChild;
-    bookshelf.removeChild(child)
-  }
-
 }
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
